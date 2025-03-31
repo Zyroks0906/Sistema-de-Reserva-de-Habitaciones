@@ -39,7 +39,7 @@ public class MainView {
                     roomView.handleRoomManagement(roomController);
                     break;
                 case 2:
-                    handleClientManagement();
+                    clientView.handleClientManagement(clientController);
                     break;
                 case 3:
                     reservationView.handleReservationManagement(reservationController, roomController, clientController);

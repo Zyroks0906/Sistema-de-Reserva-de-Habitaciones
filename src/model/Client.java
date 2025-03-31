@@ -17,24 +17,6 @@ public class Client {
         this.pastReservations = new ArrayList<>();
     }
 
-    public void addReservation(Reservation reservation) {
-        if (activeReservations.size() >= 3) {
-            throw new IllegalStateException("Máximo 3 reservas activas.");
-        }
-        activeReservations.add(reservation);
-    }
-
-    public void completeReservation(Reservation reservation) {
-        activeReservations.remove(reservation);
-        pastReservations.add(reservation);
-    }
-
-    public List<Reservation> getAllReservations() {
-        List<Reservation> allReservations = new ArrayList<>(activeReservations);
-        allReservations.addAll(pastReservations);
-        return allReservations;
-    }
-
     //getters y setters
     public String getId() {
         return id;

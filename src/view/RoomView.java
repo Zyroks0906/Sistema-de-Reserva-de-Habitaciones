@@ -29,13 +29,18 @@ public class RoomView {
         System.out.println("Número: " + room.getNumber());
         System.out.println("Tipo: " + room.getType());
         System.out.println("Estado: " + room.getStatus());
-        System.out.println("Descripción: " + room.getDescription());
-        System.out.println("Estado: " + room.getStatus());
+        System.out.println("Descripción: " + room.getDescription());;
     }
 
     public int getRoomNumberInput() {
-        System.out.print("Ingrese el número de la habitación: ");
-        return Integer.parseInt(scanner.nextLine());
+        while (true) {
+            try {
+                System.out.print("Ingrese el número de la habitación: ");
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+            }
+        }
     }
 
     public void handleRoomManagement(RoomController roomController) {

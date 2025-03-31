@@ -36,7 +36,8 @@ public class ReservationController {
 
         Reservation newReservation = new Reservation(id, room, client, checkIn, checkOut);
         reservations.add(newReservation);
-        client.addReservation(newReservation);
+        client.getActiveReservations().add(newReservation); // Agregar a reservas activas
+        client.getPastReservations().add(newReservation);   // Registrar en el historial
         room.setStatus(RoomStatusEnum.RESERVADA);
     }
 
@@ -62,8 +63,13 @@ public class ReservationController {
                 .orElse(null);
 
         if (reservation != null) {
-            reservation.getClient().completeReservation(reservation);
+            // Remover de reservas activas
+            reservation.getClient().getActiveReservations().remove(reservation);
+
+            // Registrar en el historial (ya está en pastReservations, no es necesario agregarlo de nuevo)
             reservation.getRoom().setStatus(RoomStatusEnum.DISPONIBLE);
+        } else {
+            throw new IllegalStateException("La reserva no existe.");
         }
     }
 
