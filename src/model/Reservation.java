@@ -27,6 +27,10 @@ public class Reservation {
         return days * room.getType().getPrice();
     }
 
+    public boolean overlapsWith(LocalDate startDate, LocalDate endDate) {
+        return !(checkOut.isBefore(startDate) || checkIn.isAfter(endDate));
+    }
+
     public String getId() {
         return id;
     }
@@ -57,6 +61,7 @@ public class Reservation {
 
     public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
+        this.totalPrice = calculateTotalPrice();
     }
 
     public LocalDate getCheckOut() {
@@ -65,6 +70,7 @@ public class Reservation {
 
     public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
+        this.totalPrice = calculateTotalPrice();
     }
 
     public double getTotalPrice() {

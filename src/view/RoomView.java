@@ -1,24 +1,67 @@
 package view;
 
+import model.Room;
+import controller.RoomController;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class RoomView {
     private Scanner scanner = new Scanner(System.in);
 
     public void showRoomMenu() {
-        System.out.println("=== Gestión de Habitaciones ===");
+        System.out.println("\n === Gestión de Habitaciones ===");
         System.out.println("1. Listar Habitaciones");
         System.out.println("2. Ver Detalles de una Habitación");
         System.out.println("3. Volver al Menú Principal");
         System.out.print("Seleccione una opción: ");
     }
 
-    public int getUserChoice() {
-        return scanner.nextInt();
+    public void listRooms(List<Room> rooms) {
+        System.out.println("\n === Lista de Habitaciones ===");
+        for (Room room : rooms) {
+            System.out.println("Número: " + room.getNumber() + " | Tipo: " + room.getType() + " | Estado: " + room.getStatus() + " | Descripción: " + room.getDescription());
+        }
     }
 
-    public void showRoomDetails(String roomDetails) {
-        System.out.println("=== Detalles de la Habitación ===");
-        System.out.println(roomDetails);
+    public void showRoomDetails(Room room) {
+        System.out.println("\n === Detalles de la Habitación ===");
+        System.out.println("Número: " + room.getNumber());
+        System.out.println("Tipo: " + room.getType());
+        System.out.println("Estado: " + room.getStatus());
+        System.out.println("Descripción: " + room.getDescription());
+        System.out.println("Estado: " + room.getStatus());
+    }
+
+    public int getRoomNumberInput() {
+        System.out.print("Ingrese el número de la habitación: ");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public void handleRoomManagement(RoomController roomController) {
+        int roomChoice;
+        do {
+            showRoomMenu();
+            roomChoice = getRoomNumberInput();
+            switch (roomChoice) {
+                case 1:
+                    listRooms(roomController.getAllRooms());
+                    break;
+                case 2:
+                    int roomNumber = getRoomNumberInput();
+                    Room room = roomController.getRoomByNumber(roomNumber);
+                    if (room != null) {
+                        showRoomDetails(room);
+                    } else {
+                        System.out.println("Habitación no encontrada.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (roomChoice != 3);
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Room {
     private int number;
     private RoomTypeEnum type;
@@ -45,5 +47,9 @@ public class Room {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
+        return status == RoomStatusEnum.DISPONIBLE;
     }
 }

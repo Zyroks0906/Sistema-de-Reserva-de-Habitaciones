@@ -3,6 +3,7 @@ package controller;
 import model.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ReservationController {
             throw new IllegalArgumentException("Fechas de reserva no válidas.");
         }
 
-        if (checkIn.until(checkOut).getDays() > 90) {
+        if (ChronoUnit.DAYS.between(checkIn, checkOut) > 90) {
             throw new IllegalArgumentException("La reserva no puede exceder los 90 días.");
         }
 
@@ -68,5 +69,15 @@ public class ReservationController {
 
     public List<Reservation> getAllReservations() {
         return reservations;
+    }
+
+    public List<Reservation> getActiveReservationsByClient(Client client) {
+        List<Reservation> activeReservations = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getClient().equals(client) && reservation.getCheckIn().isAfter(LocalDate.now())) {
+                activeReservations.add(reservation);
+            }
+        }
+        return activeReservations;
     }
 }

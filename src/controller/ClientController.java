@@ -13,6 +13,9 @@ public class ClientController {
     }
 
     public void addClient(String id, String name) {
+        if (clientExists(id)) {
+            throw new IllegalArgumentException("El ID del cliente ya existe.");
+        }
         clients.add(new Client(id, name));
     }
 
@@ -25,5 +28,9 @@ public class ClientController {
 
     public List<Client> getAllClients() {
         return clients;
+    }
+
+    public boolean clientExists(String id) {
+        return clients.stream().anyMatch(client -> client.getId().equals(id));
     }
 }

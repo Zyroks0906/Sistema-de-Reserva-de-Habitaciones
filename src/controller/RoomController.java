@@ -35,4 +35,22 @@ public class RoomController {
     public List<Room> getAllRooms() {
         return rooms;
     }
+
+    public List<String> listRooms() {
+        List<String> roomDescriptions = new ArrayList<>();
+        for (Room room : rooms) {
+            roomDescriptions.add("Room " + room.getNumber() + ": " + room.getType() + " - " + room.getDescription());
+        }
+        return roomDescriptions;
+    }
+
+    public List<Room> searchRooms(RoomTypeEnum type, RoomStatusEnum status) {
+        List<Room> filteredRooms = new ArrayList<>();
+        for (Room room : rooms) {
+            if ((type == null || room.getType() == type) && (status == null || room.getStatus() == status)) {
+                filteredRooms.add(room);
+            }
+        }
+        return filteredRooms;
+    }
 }
