@@ -4,10 +4,6 @@ import java.util.Scanner;
 import controller.ClientController;
 import controller.ReservationController;
 import controller.RoomController;
-import model.Room;
-import model.Client;
-import view.ReservationView;
-
 public class MainView {
     private Scanner scanner = new Scanner(System.in);
     private ClientController clientController;
@@ -61,10 +57,6 @@ public class MainView {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
         }
-    }
-
-    private void handleClientManagement() {
-        clientView.handleClientManagement(clientController);
     }
 
 }

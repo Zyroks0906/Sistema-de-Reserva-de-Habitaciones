@@ -1,18 +1,26 @@
-## Getting Started
+# Sistema de Reserva de Habitaciones
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este proyecto es un sistema de gestión de reservas de habitaciones desarrollado en Java, implementando el patrón de diseño MVC (Modelo-Vista-Controlador). El sistema permite gestionar habitaciones, clientes y reservas, asegurando una experiencia fluida y organizada para los usuarios.
 
-## Folder Structure
+## Características Principales
 
-The workspace contains two folders by default, where:
+- **Gestión de Habitaciones**: Listar habitaciones, ver detalles y verificar disponibilidad.
+- **Gestión de Clientes**: Registrar nuevos clientes, listar clientes existentes y ver detalles de un cliente.
+- **Gestión de Reservas**: Crear, listar, cancelar y completar reservas.
+- **Validaciones**: Manejo de fechas, disponibilidad de habitaciones y restricciones de reservas activas por cliente.
+- **Encapsulación y Modularidad**: Uso de clases bien estructuradas con atributos privados y acceso controlado mediante getters y setters.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Estructura del Proyecto
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+El proyecto sigue el patrón MVC, dividiendo la lógica en tres capas principales:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+- **Modelo (`src/model`)**: Contiene las clases `Room`, `Client` y `Reservation`, que representan los datos principales del sistema.
+- **Vista (`src/view`)**: Contiene las clases `MainView`, `RoomView`, `ClientView` y `ReservationView`, encargadas de interactuar con el usuario.
+- **Controlador (`src/controller`)**: Contiene las clases `RoomController`, `ClientController` y `ReservationController`, que gestionan la lógica de negocio.
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### Diagrama de Carpetas
+src/ 
+├── controller/ # Controladores que gestionan la lógica de negocio 
+├── model/ # Clases que representan los datos del sistema 
+├── view/ # Clases que interactúan con el usuario 
+└── App.java # Punto de entrada del programa
