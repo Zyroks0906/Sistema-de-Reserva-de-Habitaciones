@@ -29,36 +29,43 @@ public class RoomView {
         System.out.println("Número: " + room.getNumber());
         System.out.println("Tipo: " + room.getType());
         System.out.println("Estado: " + room.getStatus());
-        System.out.println("Descripción: " + room.getDescription());;
+        System.out.println("Descripción: " + room.getDescription());
     }
 
     public int getRoomNumberInput() {
-        while (true) {
-            try {
-                System.out.print("Ingrese el número de la habitación: ");
-                return Integer.parseInt(scanner.nextLine().trim());
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número.");
-            }
+        try {
+            System.out.print("Ingrese el número de la habitación: ");
+            return Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada no válida. Por favor, ingrese un número.");
+            return -1;
         }
     }
 
     public void handleRoomManagement(RoomController roomController) {
-        int roomChoice;
+        int roomChoice = 0;
         do {
             showRoomMenu();
-            roomChoice = getRoomNumberInput();
+            try {
+                roomChoice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+                continue; // Reintenta mostrar el menú
+            }
+
             switch (roomChoice) {
                 case 1:
                     listRooms(roomController.getAllRooms());
                     break;
                 case 2:
                     int roomNumber = getRoomNumberInput();
-                    Room room = roomController.getRoomByNumber(roomNumber);
-                    if (room != null) {
-                        showRoomDetails(room);
-                    } else {
-                        System.out.println("Habitación no encontrada.");
+                    if (roomNumber != -1) { // Verifica si la entrada fue válida
+                        Room room = roomController.getRoomByNumber(roomNumber);
+                        if (room != null) {
+                            showRoomDetails(room);
+                        } else {
+                            System.out.println("Habitación no encontrada.");
+                        }
                     }
                     break;
                 case 3:

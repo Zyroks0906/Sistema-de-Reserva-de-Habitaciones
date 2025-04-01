@@ -66,4 +66,5 @@ public class MainView {
     private void handleClientManagement() {
         clientView.handleClientManagement(clientController);
     }
+
 }

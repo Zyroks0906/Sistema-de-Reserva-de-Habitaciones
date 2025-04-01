@@ -1,9 +1,7 @@
 package view;
 
 import model.*;
-import controller.ReservationController;
-import controller.RoomController;
-import controller.ClientController;
+import controller.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,15 +19,6 @@ public class ReservationView {
         System.out.print("Seleccione una opción: ");
     }
 
-    public int getUserChoice() {
-        while (true) {
-            try {
-                return Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número.");
-            }
-        }
-    }
 
     public void showReservationDetails(Reservation reservation) {
         System.out.println("\n === Detalles de la Reserva ===");
@@ -70,6 +59,16 @@ public class ReservationView {
         } catch (NumberFormatException e) {
             System.out.println("Número de habitación no válido. Intente de nuevo.");
             return getRoomNumberInput(); // Reintentar en caso de error
+        }
+    }
+
+    public int getUserChoice() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+            }
         }
     }
 
